@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayasri J — AI & Data Science</title>
+<meta name="description" content="Jayasri J — B.Tech AI & Data Science. Building diagnostic, predictive, and full-stack systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1F0;
+    --paper-card:#FFFFFF;
+    --ink:#0E2E2B;
+    --ink-soft:#3C5350;
+    --teal:#0B3D3A;
+    --amber:#E8A33D;
+    --rose:#C9576E;
+    --low-risk:#3F8F6F;
+    --line:#D6DBD8;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    margin:0;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,241,240,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:1080px; margin:0 auto;}
+  .nav-id{font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.04em; color:var(--teal); font-weight:600;}
+  .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0; font-size:14px;}
+  .nav-links a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .nav-links a:hover{color:var(--teal);}
+  .nav-toggle{display:none;}
+
+  /* ===== HERO ===== */
+  .hero{padding:96px 0 64px; position:relative;}
+  .case-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.05em;
+    color:var(--teal); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:99px; margin-bottom:28px;
+  }
+  .case-tag .dot{width:7px; height:7px; border-radius:50%; background:var(--low-risk); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .hero h1{font-size:clamp(40px,7vw,76px); line-height:0.98; letter-spacing:-0.01em;}
+  .hero .role{font-size:clamp(16px,2.4vw,20px); color:var(--ink-soft); margin-top:18px; max-width:560px;}
+  .hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end;}
+  .readout{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .readout-title{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--teal); margin-bottom:14px; font-weight:600;}
+  .readout-row{display:flex; justify-content:space-between; padding:7px 0; border-top:1px dashed var(--line);}
+  .readout-row:first-of-type{border-top:none;}
+  .readout-row b{color:var(--ink); font-weight:600;}
+  .confidence{color:var(--low-risk); font-weight:600;}
+  .hero-cta{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    padding:12px 22px; border-radius:var(--radius); text-decoration:none;
+    display:inline-block; transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 4px 14px rgba(11,61,58,0.25);}
+  .btn-ghost{border:1px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{transform:translateY(-2px);}
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:84px 0;}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:40px; border-bottom:1px solid var(--line); padding-bottom:18px;}
+  .section-num{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:13px; font-weight:600;}
+  .section-head h2{font-size:clamp(26px,4vw,36px);}
+
+  /* ===== ABOUT ===== */
+  .about-text{font-size:17px; max-width:680px; color:var(--ink-soft);}
+  .about-text strong{color:var(--ink);}
+
+  /* ===== SKILLS ===== */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:28px 40px;}
+  .skill-block h3{font-family:'JetBrains Mono',monospace; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal); margin-bottom:14px; font-weight:600;}
+  .skill-item{margin-bottom:14px;}
+  .skill-label{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:5px;}
+  .skill-bar{height:5px; background:var(--line); border-radius:99px; overflow:hidden;}
+  .skill-fill{height:100%; background:linear-gradient(90deg,var(--teal),var(--low-risk)); border-radius:99px; width:0; transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+
+  /* ===== PROJECTS (case files) ===== */
+  .case{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius);
+    margin-bottom:28px; overflow:hidden;
+  }
+  .case-header{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:20px 26px; cursor:pointer; flex-wrap:wrap;
+  }
+  .case-header h3{font-size:21px;}
+  .case-meta{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); display:flex; align-items:center; gap:10px;}
+  .badge{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:4px 9px; border-radius:99px;
+    text-transform:uppercase; letter-spacing:.05em; font-weight:600;
+  }
+  .badge-flagship{background:rgba(232,163,61,0.16); color:#9C6A19;}
+  .badge-standard{background:rgba(11,61,58,0.08); color:var(--teal);}
+  .case-chevron{font-size:18px; color:var(--teal); transition:transform .25s;}
+  .case.open .case-chevron{transform:rotate(180deg);}
+  .case-body{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    border-top:1px solid var(--line);
+  }
+  .case.open .case-body{max-height:900px;}
+  .case-body-inner{padding:22px 26px 26px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .case-col h4{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--rose); letter-spacing:.05em; margin:0 0 8px;}
+  .case-col p, .case-col ul{margin:0; font-size:14.5px; color:var(--ink-soft);}
+  .case-col ul{padding-left:18px;}
+  .tech-pills{display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;}
+  .pill{font-family:'JetBrains Mono',monospace; font-size:11px; background:var(--paper); border:1px solid var(--line); padding:4px 9px; border-radius:99px; color:var(--ink-soft);}
+
+  /* ===== TIMELINE (education/certs) ===== */
+  .timeline{position:relative; padding-left:28px; border-left:2px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:32px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{position:absolute; left:-34px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--amber); border:3px solid var(--paper);}
+  .tl-item h3{font-size:17px;}
+  .tl-meta{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--teal); margin:4px 0 6px;}
+  .tl-item p{margin:0; color:var(--ink-soft); font-size:14.5px;}
+
+  /* ===== ACHIEVEMENTS ===== */
+  .ach-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
+  .ach-card{background:var(--paper-card); border:1px solid var(--line); padding:22px; border-radius:var(--radius);}
+  .ach-card .num{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:24px; font-weight:600;}
+  .ach-card p{margin:8px 0 0; font-size:14px; color:var(--ink-soft);}
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer{background:var(--teal); color:#EAF3F1; padding:72px 0 36px;}
+  footer h2{color:#fff; font-size:clamp(28px,5vw,44px);}
+  footer .sub{color:#BBD7D1; max-width:500px; margin-top:14px; font-size:15.5px;}
+  .contact-row{display:flex; gap:16px; flex-wrap:wrap; margin-top:32px;}
+  footer .btn-primary{background:var(--amber); color:#1B1305;}
+  footer .btn-ghost{border-color:#BBD7D1; color:#EAF3F1;}
+  .foot-bottom{margin-top:64px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.15); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:'JetBrains Mono',monospace; font-size:12px; color:#9DBDB6;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .case-body-inner{grid-template-columns:1fr;}
+    section{padding:56px 0;}
+    .hero{padding:64px 0 40px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-id">JAYASRI_J <span style="color:var(--ink-soft);">// AI &amp; DATA SCIENCE</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="case-tag"><span class="dot"></span> STATUS: OPEN TO INTERNSHIPS</div>
+      <div class="hero-grid">
+        <div>
+          <h1>Jayasri J</h1>
+          <p class="role">B.Tech Artificial Intelligence &amp; Data Science student who turns unstructured data — medical reports, sensor feeds, registration forms — into systems that classify, predict, and act.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">Review case files</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <div class="readout reveal">
+          <div class="readout-title">Candidate Readout — Auto-Generated</div>
+          <div class="readout-row"><span>Domain</span><b>AI / Data Science</b></div>
+          <div class="readout-row"><span>Core stack</span><b>Python · SQL</b></div>
+          <div class="readout-row"><span>CGPA</span><b>8.32 / 10</b></div>
+          <div class="readout-row"><span>Flagship build</span><b>Medical Report Analyzer</b></div>
+          <div class="readout-row"><span>Classification</span><span class="confidence">low-risk hire · high upside</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
+      <p class="about-text reveal">
+        I'm a final-year AI &amp; Data Science student at CMS Engineering College, Anna University, with a CGPA of <strong>8.32/10</strong>. My work lives at the intersection of <strong>NLP, predictive modeling, and full-stack delivery</strong> — I don't just train a model, I build the interface, the database, and the alert pipeline around it. That came through clearly in my medical report analyzer, where the interesting problem wasn't the classifier itself but getting an LLM to reliably read messy, unstructured PDFs and route a hospital's attention to the cases that need it first.
+      </p>
+      <p class="about-text reveal" style="margin-top:16px;">
+        I've also presented research on <strong>federated learning</strong>, attended computer vision and robotics workshops at MIT Chennai, and compete in state-level hackathons where the brief is "build it before the clock runs out." I'm looking for an internship where I can bring that same instinct — ship something that works, then make it rigorous — to real production systems.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">02</span><h2>Skill Confidence</h2></div>
+      <div class="skills-grid">
+        <div class="skill-block reveal">
+          <h3>Languages &amp; Data</h3>
+          <div class="skill-item"><div class="skill-label"><span>Python</span><span class="mono">92%</span></div><div class="skill-bar"><div class="skill-fill" data-w="92"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>SQL</span><span class="mono">85%</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>MongoDB / MySQL</span><span class="mono">80%</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>ML &amp; AI</h3>
+          <div class="skill-item"><div class="skill-label"><span>Predictive Modeling</span><span class="mono">82%</span></div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>Computer Vision</span><span class="mono">75%</span></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>Federated Learning</span><span class="mono">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+        </div>
+        <div class="skill-block reveal">
+          <h3>Applied &amp; Tools</h3>
+          <div class="skill-item"><div class="skill-label"><span>LLM API Integration</span><span class="mono">88%</span></div><div class="skill-bar"><div class="skill-fill" data-w="88"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>Prompt Engineering</span><span class="mono">85%</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+          <div class="skill-item"><div class="skill-label"><span>Full-Stack (Flask/Web)</span><span class="mono">78%</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">03</span><h2>Case Files</h2></div>
+
+      <div class="case open reveal" data-case>
+        <div class="case-header" data-toggle>
+          <div>
+            <span class="badge badge-flagship">Flagship</span>
+            <h3 style="margin-top:8px;">AI Medical Report Analyzer</h3>
+          </div>
+          <div class="case-meta">Python · PDFplumber · OpenAI/Gemini · Flask <span class="case-chevron">▾</span></div>
+        </div>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div class="case-col">
+              <h4>Problem</h4>
+              <p>Hospitals receive medical reports as unstructured PDFs, making it slow to spot the patients who need urgent attention.</p>
+              <h4 style="margin-top:16px;">Solution</h4>
+              <p>An end-to-end Python prototype that parses PDF reports, uses NLP and LLM APIs to extract critical patient metrics, and auto-classifies each case as high-risk or low-risk.</p>
+            </div>
+            <div class="case-col">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Automated hospital alert workflow for high-risk cases</li>
+                <li>Interactive AI chatbot for patient queries</li>
+                <li>Risk classification layer built on extracted metrics</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="pill">Python</span><span class="pill">PDFplumber</span><span class="pill">OpenAI/Gemini API</span><span class="pill">Flask</span><span class="pill">NLP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal" data-case>
+        <div class="case-header" data-toggle>
+          <div>
+            <span class="badge badge-standard">Full-stack</span>
+            <h3 style="margin-top:8px;">Sports Event Management System</h3>
+          </div>
+          <div class="case-meta">Python · HTML/CSS/JS · SQL <span class="case-chevron">▾</span></div>
+        </div>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div class="case-col">
+              <h4>Problem</h4>
+              <p>Collegiate sports registration and venue coordination were handled manually, creating bottlenecks during event season.</p>
+              <h4 style="margin-top:16px;">Solution</h4>
+              <p>A full-stack web application with relational database schemas to manage participant data and coordinate venues in real time.</p>
+            </div>
+            <div class="case-col">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Streamlined registration flow for participants</li>
+                <li>Relational schema for venue and roster management</li>
+                <li>Real-time coordination updates</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="pill">Python</span><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">SQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal" data-case>
+        <div class="case-header" data-toggle>
+          <div>
+            <span class="badge badge-standard">Productivity</span>
+            <h3 style="margin-top:8px;">AI-Powered Student Study Tracker</h3>
+          </div>
+          <div class="case-meta">Python · Data Structures · Tkinter <span class="case-chevron">▾</span></div>
+        </div>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div class="case-col">
+              <h4>Problem</h4>
+              <p>Students often lack a structured way to plan study time around fixed exam dates.</p>
+              <h4 style="margin-top:16px;">Solution</h4>
+              <p>A desktop productivity app that monitors academic progress and generates personalized, dynamic study schedules.</p>
+            </div>
+            <div class="case-col">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Algorithmic schedule generation tied to exam dates</li>
+                <li>Progress tracking dashboard</li>
+                <li>Lightweight desktop interface</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="pill">Python</span><span class="pill">Tkinter</span><span class="pill">Data Structures</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION & CERTS -->
+  <section id="education" style="background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">04</span><h2>Education &amp; Certifications</h2></div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <h3>B.Tech, Artificial Intelligence &amp; Data Science</h3>
+          <div class="tl-meta">CMS Engineering College, Anna University · 2022 – 2026</div>
+          <p>CGPA: 8.32 / 10. Core coursework in Data Structures &amp; Algorithms, DBMS, Operating Systems, and Software Engineering.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <h3>Machine Learning MasterClass</h3>
+          <div class="tl-meta">NoviTech R&amp;D Pvt. Ltd. · 30-day intensive certification</div>
+          <p>Hands-on technical certification covering applied machine learning fundamentals.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <h3>Introduction to Modern AI</h3>
+          <div class="tl-meta">Cisco Networking Academy</div>
+          <p>Certified coursework on foundational and modern AI concepts.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <h3>Research Presentation: Federated Learning Frameworks</h3>
+          <div class="tl-meta">Technical paper presentation</div>
+          <p>Presented original research on federated learning frameworks using artificial intelligence.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <h3>Computer Vision &amp; Robotics Workshops</h3>
+          <div class="tl-meta">MIT, Chennai</div>
+          <p>Specialized technical training in computer vision and robotics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="section-num">05</span><h2>Achievements</h2></div>
+      <div class="ach-grid">
+        <div class="ach-card reveal">
+          <div class="num">8.32</div>
+          <p>CGPA maintained across AI &amp; Data Science coursework, top-tier academic standing.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="num">State-level</div>
+          <p>Active hackathon competitor — rapid AI/Web prototyping under time pressure.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="num">3</div>
+          <p>Production-style projects shipped end-to-end, from data layer to user interface.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="num">EN / TA</div>
+          <p>Professional English, native Tamil — comfortable across technical and stakeholder communication.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's discuss the next case.</h2>
+    <p class="sub">Open to internships and entry-level roles in AI, data science, and full-stack development. I respond fastest by email.</p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:jayasrijjayachandran@gmail.com">jayasrijjayachandran@gmail.com</a>
+      <a class="btn btn-ghost" href="tel:+918248327094">+91 82483 27094</a>
+      <a class="btn btn-ghost" href="#" onclick="return false;">LinkedIn</a>
+      <a class="btn btn-ghost" href="#" onclick="return false;">GitHub</a>
+    </div>
+    <div class="foot-bottom">
+      <span>JAYASRI_J.PORTFOLIO // BUILT 2026</span>
+      <span>CASE STATUS: ACTIVELY INTERVIEWING</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Skill bar fill on view
+  const fills = document.querySelectorAll('.skill-fill');
+  const fio = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const w = e.target.getAttribute('data-w');
+        e.target.style.width = w + '%';
+        fio.unobserve(e.target);
+      }
+    });
+  },{threshold:0.4});
+  fills.forEach(f=>fio.observe(f));
+
+  // Case file accordion
+  document.querySelectorAll('[data-toggle]').forEach(header=>{
+    header.addEventListener('click', ()=>{
+      const card = header.closest('[data-case]');
+      card.classList.toggle('open');
+    });
+    header.setAttribute('tabindex','0');
+    header.setAttribute('role','button');
+    header.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Enter' || ev.key === ' '){
+        ev.preventDefault();
+        header.click();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
